@@ -22,18 +22,21 @@ Route::get('/', function () {
 
 Route::middleware('User')->group(function(){
     Route::get('dashboard', [UserController::class, 'dashboard'])->name('dashboard');
-    // Route::post('tambahkeranjang/{id}', [AdminController::class, 'tambahkeranjang'])->name('tambahkeranjang');
-    // Route::post('updateKeranjang', [AdminController::class, 'updateKeranjang'])->name('updateKeranjang');
     Route::post('/addToCart/{id}', [UserController::class, 'addTocart'])->name('addToCart')->middleware('web');
-    Route::get('transaksi', [UserController::class, 'transaksi'])->name('transaksi');
-    Route::post('transaksiProses/{id}',[UserController::class, 'transaksiProses'])->name('transaksiProses');
-    // Route::get('riwayat', [AdminController::class, 'riwayat'])->name('riwayat');
+    Route::delete('deleteCart/{id}', [UserController::class, 'deleteCart'])->name('deleteCart');
+    Route::post('order', [UserController::class, 'order'])->name('order');
+    Route::get('/cetak-invoice/{no_order}', [UserController::class, 'cetakInvoice'])->name('cetakInvoice');
+    Route::get('invoice/{no_order}', [UserController::class, 'invoice'])->name('invoice');
+    Route::post('/clear-cart', [UserController::class, 'clearCart'])->name('clearCart');
+
+
 });
 
 Route::middleware('Admin')->group(function(){
     Route::get('dashboardAd', [AdminController::class, 'dashboardAd'])->name('dashboardAd');
     Route::resource('barang', AdminController::class);
     Route::get('pendataan', [AdminController::class, 'pendataan'])->name('pendataan');
+    // Route::post('terima/{id}', [AdminController::class, 'terima'])->name('terima');
 });
 
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');

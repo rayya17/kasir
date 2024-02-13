@@ -17,7 +17,6 @@ return new class extends Migration
             $table->unsignedBigInteger('barang_id');
             $table->integer('jumlah');
             $table->integer('subtotal')->nullable();
-            $table->decimal('diskon', 10,2)->default(0);
             $table->timestamps();
 
             $table->foreign('barang_id')->references('id')->on('barangs');

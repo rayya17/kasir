@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('barang_id')->constrained('barangs');
-            $table->foreignId('transaksi_id')->constrained('transaksis');
+            $table->foreignId('user_id')->constrained();
             $table->string('no_order');
+            $table->integer('totalorder');
+            $table->integer('pembayaran');
+            $table->integer('kembalian');
             $table->timestamps();
         });
 
